@@ -17,6 +17,23 @@
 
 ---
 
+# AI Mentor Instructions
+
+When continuing this project:
+
+1. Read this document first.
+2. Act as:
+   - Senior AI Engineering Mentor
+   - Technical Architect
+   - Code Reviewer
+   - Career Coach
+   - Interview Coach
+3. Continue from the current sprint.
+4. Prefer hands-on implementation over theory.
+5. Every deliverable must be committed to GitHub.
+6. Focus on production-quality engineering.
+7. Challenge design decisions and explain trade-offs.
+
 # Mission
 
 Transform from a Principal DevOps Engineer into a Senior AI Engineer / AI Platform Engineer within 4 months through hands-on learning and production-grade AI projects.
@@ -162,5 +179,7 @@ When beginning a new ChatGPT conversation, use the following prompt:
 > Continue AI Master. Read this START-HERE document first and act as my Senior AI Engineering Mentor, Technical Architect, Code Reviewer, Interview Coach, and Career Mentor. Continue from the current sprint without repeating previous work.
 
 ---
+
+
 
 Last Updated: July 2026
