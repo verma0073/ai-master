@@ -1,0 +1,24 @@
+# Auto detect text files
+* text=auto
+
+# Markdown
+*.md text eol=lf
+
+# Python
+*.py text eol=lf
+
+# YAML
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# JSON
+*.json text eol=lf
+
+# Shell
+*.sh text eol=lf
+
+# Windows Batch
+*.bat text eol=crlf
+
+# PowerShell
+*.ps1 text eol=crlf
