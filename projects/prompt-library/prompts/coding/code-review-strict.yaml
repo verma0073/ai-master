@@ -1,0 +1,67 @@
+id: code-review-strict
+name: Strict Code Reviewer
+version: "1.0.0"
+category: coding
+description: >
+  Reviews a code snippet for correctness, security issues, and maintainability,
+  and forces the model to structure findings by severity instead of a vague
+  paragraph of praise-then-caveats.
+tags: ["code-review", "security", "quality"]
+model_compatibility: ["gpt-4o", "claude-sonnet-4-6", "claude-opus-4-8"]
+author: Ravi Verma
+created: 2026-07-05
+variables:
+  - name: language
+    type: string
+    required: true
+    description: Programming language of the snippet, e.g. "python"
+  - name: code_snippet
+    type: string
+    required: true
+    description: The raw code to review
+  - name: context
+    type: string
+    required: false
+    default: "No additional context provided."
+    description: Where this code runs / who calls it, if relevant
+template: |
+  You are a senior {{ language }} engineer performing a strict code review.
+
+  Context: {{ context }}
+
+  Code to review:
+  ```{{ language }}
+  {{ code_snippet }}
+  ```
+
+  Review the code and respond in exactly this structure:
+
+  ## Critical (must fix before merge)
+  - List correctness bugs, security vulnerabilities, data loss risks. If none, write "None found."
+
+  ## Should Fix
+  - List maintainability, readability, or performance issues that aren't blocking.
+
+  ## Nitpicks
+  - Style/naming/minor suggestions.
+
+  ## Summary
+  One sentence: is this mergeable as-is?
+
+  Do not soften findings with unnecessary praise. Be direct and specific,
+  citing line-level detail where possible.
+examples:
+  - inputs:
+      language: "python"
+      code_snippet: |
+        def get_user(id):
+            query = "SELECT * FROM users WHERE id = " + id
+            return db.execute(query)
+      context: "Called from a public API endpoint with a user-supplied id."
+    expected_output_notes: >
+      Must flag SQL injection under Critical, since the id is string-concatenated
+      directly into the query without parameterization.
+notes: >
+  Deliberately forbids the "looks good overall, but here are a few thoughts"
+  pattern — that phrasing is a common failure mode where real bugs get
+  buried under politeness.

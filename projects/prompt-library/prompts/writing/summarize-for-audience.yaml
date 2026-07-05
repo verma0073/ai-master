@@ -1,0 +1,41 @@
+id: summarize-for-audience
+name: Audience-Calibrated Summarizer
+version: "1.0.0"
+category: writing
+description: >
+  Summarizes text at a specified reading/expertise level, avoiding the generic
+  "3 bullet points" output that ignores who's actually going to read it.
+tags: ["summarization", "writing"]
+model_compatibility: ["gpt-4o", "claude-sonnet-4-6"]
+author: Ravi Verma
+created: 2026-07-05
+variables:
+  - name: audience
+    type: string
+    required: true
+    description: e.g. "a non-technical executive", "a junior engineer", "a 10-year-old"
+  - name: max_words
+    type: integer
+    required: false
+    default: 150
+  - name: source_text
+    type: string
+    required: true
+template: |
+  Summarize the following text for {{ audience }}. Use vocabulary and framing
+  appropriate for that audience specifically — do not write a generic summary
+  and then simplify the words; think about what that audience actually needs
+  to take away.
+
+  Maximum length: {{ max_words }} words.
+
+  Text:
+  {{ source_text }}
+examples:
+  - inputs:
+      audience: "a non-technical executive deciding whether to fund this project"
+      max_words: 100
+      source_text: "[a technical RFC about migrating a monolith to microservices]"
+    expected_output_notes: >
+      Should lead with cost/risk/timeline implications, not architectural
+      terminology like "service boundaries" or "eventual consistency."

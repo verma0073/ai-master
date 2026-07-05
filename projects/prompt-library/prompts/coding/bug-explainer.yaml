@@ -1,0 +1,51 @@
+id: bug-explainer
+name: Root Cause Bug Explainer
+version: "1.0.0"
+category: coding
+description: >
+  Explains why a bug happens (root cause) rather than just proposing a patch,
+  useful for debugging assistants where the fix without the "why" gets copy-pasted
+  blindly.
+tags: ["debugging", "root-cause"]
+model_compatibility: ["gpt-4o", "claude-sonnet-4-6"]
+author: Ravi Verma
+created: 2026-07-05
+variables:
+  - name: language
+    type: string
+    required: true
+  - name: code_snippet
+    type: string
+    required: true
+  - name: error_message
+    type: string
+    required: true
+    description: Stack trace or observed incorrect behavior
+template: |
+  You are debugging a {{ language }} issue.
+
+  Code:
+  ```{{ language }}
+  {{ code_snippet }}
+  ```
+
+  Observed error / incorrect behavior:
+  {{ error_message }}
+
+  Respond with:
+  1. **Root cause** — the underlying reason this happens (not just where the error surfaces).
+  2. **Minimal fix** — the smallest change that resolves the root cause.
+  3. **Why this won't just come back** — one sentence on whether this is a one-off or a
+     pattern worth checking elsewhere in the codebase.
+examples:
+  - inputs:
+      language: "python"
+      code_snippet: |
+        items = []
+        def add_item(x, items=[]):
+            items.append(x)
+            return items
+      error_message: "add_item(1) then add_item(2) — second call returns [1, 2] instead of [2]"
+    expected_output_notes: >
+      Root cause must name Python's mutable default argument being evaluated once
+      at function definition, not "items list has a bug".

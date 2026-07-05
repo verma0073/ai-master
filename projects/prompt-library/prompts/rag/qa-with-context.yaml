@@ -1,0 +1,45 @@
+id: qa-with-context
+name: Grounded QA Over Retrieved Context
+version: "1.0.0"
+category: rag
+description: >
+  Answers a question strictly from provided retrieved context, with an explicit
+  instruction to say "not found in context" instead of hallucinating — this is
+  the prompt that will get reused directly in the Sprint 3 RAG project.
+tags: ["rag", "grounded-qa", "hallucination-prevention"]
+model_compatibility: ["gpt-4o", "claude-sonnet-4-6"]
+author: Ravi Verma
+created: 2026-07-05
+variables:
+  - name: context_chunks
+    type: string
+    required: true
+    description: Retrieved document chunks, pre-joined with source markers
+  - name: question
+    type: string
+    required: true
+template: |
+  Answer the question using ONLY the context below. If the answer is not
+  present in the context, respond exactly with: "I don't have enough
+  information in the provided context to answer that."
+
+  Do not use outside knowledge, even if you're confident it's correct — this
+  answer must be traceable to the context provided.
+
+  Context:
+  {{ context_chunks }}
+
+  Question: {{ question }}
+
+  When you do answer, cite which source marker(s) support each claim, e.g. [Source 2].
+examples:
+  - inputs:
+      context_chunks: "[Source 1] The company's refund policy allows returns within 30 days of purchase."
+      question: "What is the return window?"
+    expected_output_notes: >
+      Should answer "30 days" and cite [Source 1]. If asked something not in
+      context (e.g. "what is the CEO's name?"), must give the fallback line,
+      not a guess.
+notes: >
+  This is intentionally the first prompt written for the RAG project too —
+  proving the library is actually reused across sprints, not just a demo.
