@@ -1,14 +1,41 @@
-[build-system]
-requires = ["setuptools>=75", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "ai-master"
 version = "0.1.0"
 description = "Personal AI Engineering Platform"
 requires-python = ">=3.12"
-authors = [
-    { name = "Ravi Verma" }
+
+dependencies = [
+    "python-dotenv>=1.0.1",
+    "requests>=2.32.3",
+    "httpx>=0.28.1",
+    "rich>=14.0.0",
+    "typer>=0.16.0",
+]
+
+[dependency-groups]
+dev = [
+    "black",
+    "ruff",
+    "pytest",
+    "pytest-cov",
+    "mypy",
+    "pre-commit",
+    "ipykernel",
+    "jupyter",
+]
+
+ai = [
+    "openai",
+    "langchain",
+    "langchain-openai",
+    "langgraph",
+    "pydantic",
+    "tiktoken",
+]
+
+web = [
+    "fastapi",
+    "uvicorn",
 ]
 
 [tool.black]
@@ -19,22 +46,9 @@ target-version = ["py312"]
 line-length = 100
 target-version = "py312"
 
-[tool.ruff.lint]
-select = [
-    "E",
-    "F",
-    "I",
-    "UP",
-    "B"
-]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
 
 [tool.mypy]
 python_version = "3.12"
-warn_return_any = true
-warn_unused_configs = true
-disallow_untyped_defs = false
 ignore_missing_imports = true
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
