@@ -1,6 +1,5 @@
-from app.services.deepseek_provider import DeepSeekProvider
-from app.services.gemini_provider import GeminiProvider
-
+from app.providers.deepseek_provider import DeepSeekProvider
+from app.providers.gemini_provider import GeminiProvider
 
 class ProviderFactory:
 

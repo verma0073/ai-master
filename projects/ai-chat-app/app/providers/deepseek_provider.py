@@ -1,5 +1,4 @@
-from app.services.llm_provider import LLMProvider
-
+from app.providers.llm_provider import LLMProvider
 
 class DeepSeekProvider(LLMProvider):
 

@@ -1,6 +1,12 @@
 from fastapi import FastAPI
 
-from app.api.chat import router as chat_router
+from app.api.route import router as chat_router
+
+from app.core.config import get_settings
+
+settings = get_settings()
+
+print("DEFAULT_PROVIDER FROM SETTINGS:", settings.DEFAULT_PROVIDER)
 
 app = FastAPI(
     title="AI Chat Application",
