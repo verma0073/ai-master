@@ -6,7 +6,6 @@ from app.core.config import get_settings
 
 settings = get_settings()
 
-print("DEFAULT_PROVIDER FROM SETTINGS:", settings.DEFAULT_PROVIDER)
 
 app = FastAPI(
     title="AI Chat Application",
