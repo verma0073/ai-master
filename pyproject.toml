@@ -2,6 +2,7 @@
 name = "ai-master"
 version = "0.1.0"
 description = "Personal AI Engineering Platform"
+readme = "README.md"
 requires-python = ">=3.12"
 
 dependencies = [
@@ -10,32 +11,46 @@ dependencies = [
     "httpx>=0.28.1",
     "rich>=14.0.0",
     "typer>=0.16.0",
+    "PyYAML>=6.0",
+    "Jinja2>=3.1",
 ]
 
 [dependency-groups]
-dev = [
-    "black",
-    "ruff",
-    "pytest",
-    "pytest-cov",
-    "mypy",
-    "pre-commit",
-    "ipykernel",
-    "jupyter",
-]
 
-ai = [
-    "openai",
-    "langchain",
-    "langchain-openai",
-    "langgraph",
-    "pydantic",
-    "tiktoken",
+dev = [
+    "black>=25.0.0",
+    "ruff>=0.12.0",
+    "pytest>=8.4.0",
+    "pytest-cov>=6.2.0",
+    "mypy>=1.17.0",
+    "pre-commit>=4.2.0",
+    "ipykernel>=6.30.0",
+    "jupyter>=1.1.1",
 ]
 
 web = [
-    "fastapi",
-    "uvicorn",
+    "fastapi>=0.116.0",
+    "uvicorn[standard]>=0.35.0",
+]
+
+database = [
+    "sqlalchemy>=2.0.42",
+    "alembic>=1.16.4",
+    "psycopg[binary]>=3.2.9",
+    "pgvector>=0.4.1",
+]
+
+storage = [
+    "minio>=7.2.16",
+    "redis>=6.2.0",
+]
+
+ai = [
+    "openai>=1.98.0",
+    "langchain>=0.3.27",
+    "langchain-openai>=0.3.29",
+    "langgraph>=0.6.3",
+    "tiktoken>=0.10.0",
 ]
 
 [tool.black]
